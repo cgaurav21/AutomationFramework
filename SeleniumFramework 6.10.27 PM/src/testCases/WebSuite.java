@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
 
 import Listeners.ExtentManager;
 import utility.Log;
@@ -37,44 +38,40 @@ public class WebSuite extends TestBase{
 	}
 
 	
-	@Test (enabled = true)
-	public void SEARCH_NAME_TC() throws InterruptedException{
+	@Test (priority = 1, description= "Search name test case google", enabled = true)
+	public void SEARCH_NAME_TC(Method testMethod) throws InterruptedException{
 			System.out.println("Test Print");
 			Utils utils = new Utils(driver);
 			String title = utils.getPageTitle();
-//			String title = getDriver().getTitle();
 			System.out.println(title);
 			//Assert.assertTrue(driver.getTitle().contains("Google"));			
 			//new LoginPagePF(driver).searchSomething();
 			//Boolean test = utils.isElementPresent(new LoginPagePF(driver).getSearch());
 			//utils.verifyPresent(new LoginPagePF(driver).getSearch());
-			test = extent.createTest("Search Name TC", "Test google");
-//			if(driver.getTitle().contains("abc")) {
-//				//test.pass(driver.getTitle() + "contain" + "Google");
-//				test.log(Status.PASS, driver.getTitle() + "contain" + "Google");
-//			}
-//			else {
-//				//test.log(Status.FAIL, driver.getTitle() + "doesnt contain" + "Google");
-//				test.fail(driver.getTitle() + "doesnt contain" + "Google");
-//			
-//			}
+			//test = extent.createTest(testMethod.getName(), "Search name test case google");
+
 			Assert.assertEquals(driver.getTitle(), "ABC");
-//			
-//			
-//			System.out.println("TEST LAST");
-//			
-		
-			//driver.get("https://www.youtube.com");
+			//test.log(Status.PASS, "Page Title is not Google");
+
 	}
 	
-	
-	@AfterMethod
-	public void afterMethod(ITestResult result) throws Exception {
-		Log.endTestCase(testName);
-		if(result.getStatus() == ITestResult.FAILURE) {
-			String temp = Utils.takeScreenshot(driver, testName);
-			test.fail(result.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
-			}
-		extent.flush();
+	@Test (priority = 2, description= "Search name test case google 2", enabled = true)
+	public void SEARCH_NAME_2_TC(Method testMethod) throws InterruptedException{
+			//test = extent.createTest(testMethod.getName(), "Search name test case google 2");
+
+			Assert.assertEquals(driver.getTitle(), "Google");
+			//test.log(Status.PASS, "Page Title is Google");
+			
+
 	}
+	
+//	@AfterMethod
+//	public void afterMethod(ITestResult result) throws Exception {
+//		Log.endTestCase(testName);
+//		if(result.getStatus() == ITestResult.FAILURE) {
+//			String temp = Utils.takeScreenshot(driver, testName);
+//			test.fail(result.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
+//			}
+//		extent.flush();
+//	}
 } 

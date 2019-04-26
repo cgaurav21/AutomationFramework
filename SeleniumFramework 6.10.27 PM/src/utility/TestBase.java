@@ -14,12 +14,12 @@ public class TestBase {
 	public WebDriver driver;
     static ConfigFileReader configfilereader;
  
-//    public WebDriver getDriver() {
-//        return driver;
-//    }
+    public WebDriver getDriver() {
+        return driver;
+    }
  
 	@BeforeClass
-    public void setup () {
+    public void setup() {
        
         configfilereader = new ConfigFileReader();
         String browserName = configfilereader.getBrowserName();

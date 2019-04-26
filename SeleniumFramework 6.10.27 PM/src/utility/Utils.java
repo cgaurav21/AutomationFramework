@@ -1,6 +1,11 @@
 package utility;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.NoSuchElementException;
@@ -65,10 +70,15 @@ public class Utils {
 //	}
 	
 
-	 public static String takeScreenshot(WebDriver driver, String sTestCaseName) throws Exception{
+	 public static String takeScreenshot(WebDriver driver, String testname) throws Exception{
+		 
+		 Date date = Calendar.getInstance().getTime();
+		 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		 String formattedDateTime = dateFormat.format(date);
+
 		 try{
 			 File src = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-			 String path = Constant.Path_ScreenShot + "/src/Screenshots/" + sTestCaseName + ".png";
+			 String path = System.getProperty("user.dir") + "/src/Screenshots/"  + testname + " " + formattedDateTime +".png";
 			 System.out.println(path);
 			 File destination = new File(path);
 			 FileUtils.copyFile(src, destination);
